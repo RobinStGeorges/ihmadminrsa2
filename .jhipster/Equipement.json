@@ -1,0 +1,89 @@
+{
+  "applications": "*",
+  "changelogDate": "20230720072514",
+  "entityTableName": "equipement",
+  "fields": [
+    {
+      "fieldName": "adressePhysique",
+      "fieldType": "String",
+      "fieldValidateRules": ["pattern"],
+      "fieldValidateRulesPattern": "[A-Za-z-0-9]{1}[A-Za-z-0-9]{1}[:|-]{1}[A-Za-z-0-9]{1}[A-Za-z-0-9]{1}[:|-]{1}[A-Za-z-0-9]{1}[A-Za-z-0-9]{1}[:|-]{1}[A-Za-z-0-9]{1}[A-Za-z-0-9]{1}[:|-]{1}[A-Za-z-0-9]{1}[A-Za-z-0-9]{1}[:|-]{0,1}[A-Za-z-0-9]{0,1}[A-Za-z-0-9]{0,1}"
+    },
+    {
+      "fieldName": "equipementType",
+      "fieldType": "EquipementType",
+      "fieldValues": "Ordinateur_Portable_DGFIP,Ordinateur_Portable_Domicile,Ordinateur_Fixe,Clavier,Ecran,AdaptateurUsbEth,HubEth,RAM"
+    },
+    {
+      "fieldName": "ip",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "biosVersion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "commentaire",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "asset",
+      "fieldType": "String",
+      "fieldValidateRules": ["pattern"],
+      "fieldValidateRulesPattern": "[S]{1}[0-9]{5,8}"
+    },
+    {
+      "fieldName": "numeroSerie",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "modele",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "generation",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "marque",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "fonctionnel",
+      "fieldType": "Boolean"
+    },
+    {
+      "fieldName": "cleAntiVolAdmin",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "cleAntiVolCollaborateur",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Equipement",
+  "relationships": [
+    {
+      "otherEntityName": "numeroStation",
+      "otherEntityRelationshipName": "equipement",
+      "relationshipName": "numeroStation",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "teletravail",
+      "otherEntityRelationshipName": "equipement",
+      "relationshipName": "teletravail",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "localisation",
+      "otherEntityRelationshipName": "equipement",
+      "relationshipName": "localisation",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

@@ -1,0 +1,92 @@
+{
+  "applications": "*",
+  "changelogDate": "20230720072513",
+  "entityTableName": "collaborateur",
+  "fields": [
+    {
+      "fieldName": "identifiant",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "matricule",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "societe",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "email",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "tel",
+      "fieldType": "String",
+      "fieldValidateRules": ["pattern"],
+      "fieldValidateRulesPattern": "^((\\+)33|0|0033)[1-9](\\d{2}){4}$"
+    },
+    {
+      "fieldName": "profil",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "dateEntree",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "dateSortie",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "statut",
+      "fieldType": "StatutCollaborateur",
+      "fieldValues": "Arrivee,Sortie,Actif,Inactif"
+    },
+    {
+      "fieldName": "commentaire",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Collaborateur",
+  "relationships": [
+    {
+      "otherEntityName": "projet",
+      "otherEntityRelationshipName": "collaborateur",
+      "relationshipName": "projet",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityField": "equipementType",
+      "otherEntityName": "equipement",
+      "relationshipName": "equipements",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "localisation",
+      "otherEntityRelationshipName": "collaborateur",
+      "relationshipName": "localisation",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityField": "nom",
+      "otherEntityName": "projet",
+      "otherEntityRelationshipName": "cp",
+      "relationshipName": "cp",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityField": "nom",
+      "otherEntityName": "projet",
+      "otherEntityRelationshipName": "dp",
+      "relationshipName": "dp",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

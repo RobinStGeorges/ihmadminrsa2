@@ -1,0 +1,25 @@
+{
+  "ihmadminRsa2App": {
+    "numeroStation": {
+      "home": {
+        "title": "Numero Stations",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Numero Station",
+        "createOrEditLabel": "Create or edit a Numero Station",
+        "notFound": "No Numero Stations found"
+      },
+      "created": "A new Numero Station is created with identifier {{ param }}",
+      "updated": "A Numero Station is updated with identifier {{ param }}",
+      "deleted": "A Numero Station is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Numero Station {{ id }}?"
+      },
+      "detail": {
+        "title": "Numero Station"
+      },
+      "id": "ID",
+      "numeroStation": "Numero Station",
+      "equipement": "Equipement"
+    }
+  }
+}

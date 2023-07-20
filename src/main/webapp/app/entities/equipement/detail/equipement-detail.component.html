@@ -1,0 +1,86 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="equipement">
+      <h2 data-cy="equipementDetailsHeading"><span jhiTranslate="ihmadminRsa2App.equipement.detail.title">Equipement</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ equipement.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.equipement.adressePhysique">Adresse Physique</span></dt>
+        <dd>
+          <span>{{ equipement.adressePhysique }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.equipement.equipementType">Equipement Type</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'ihmadminRsa2App.EquipementType.' + equipement.equipementType }}">{{ equipement.equipementType }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.equipement.ip">Ip</span></dt>
+        <dd>
+          <span>{{ equipement.ip }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.equipement.biosVersion">Bios Version</span></dt>
+        <dd>
+          <span>{{ equipement.biosVersion }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.equipement.commentaire">Commentaire</span></dt>
+        <dd>
+          <span>{{ equipement.commentaire }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.equipement.asset">Asset</span></dt>
+        <dd>
+          <span>{{ equipement.asset }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.equipement.numeroSerie">Numero Serie</span></dt>
+        <dd>
+          <span>{{ equipement.numeroSerie }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.equipement.modele">Modele</span></dt>
+        <dd>
+          <span>{{ equipement.modele }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.equipement.generation">Generation</span></dt>
+        <dd>
+          <span>{{ equipement.generation }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.equipement.marque">Marque</span></dt>
+        <dd>
+          <span>{{ equipement.marque }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.equipement.fonctionnel">Fonctionnel</span></dt>
+        <dd>
+          <span>{{ equipement.fonctionnel }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.equipement.cleAntiVolAdmin">Cle Anti Vol Admin</span></dt>
+        <dd>
+          <span>{{ equipement.cleAntiVolAdmin }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.equipement.cleAntiVolCollaborateur">Cle Anti Vol Collaborateur</span></dt>
+        <dd>
+          <span>{{ equipement.cleAntiVolCollaborateur }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.equipement.localisation">Localisation</span></dt>
+        <dd>
+          <div *ngIf="equipement.localisation">
+            <a [routerLink]="['/localisation', equipement.localisation.id, 'view']">{{ equipement.localisation.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/equipement', equipement.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,189 @@
+<div>
+  <h2 id="page-heading" data-cy="CollaborateurHeading">
+    <span jhiTranslate="ihmadminRsa2App.collaborateur.home.title">Collaborateurs</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="ihmadminRsa2App.collaborateur.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-collaborateur"
+        [routerLink]="['/collaborateur/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="ihmadminRsa2App.collaborateur.home.createLabel"> Create a new Collaborateur </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="collaborateurs?.length === 0">
+    <span jhiTranslate="ihmadminRsa2App.collaborateur.home.notFound">No Collaborateurs found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="collaborateurs && collaborateurs.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <!-- <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th> -->
+          <th scope="col" jhiSortBy="identifiant">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.collaborateur.identifiant">Identifiant</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="matricule">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.collaborateur.matricule">Matricule</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="societe">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.collaborateur.societe">Societe</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="email">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.collaborateur.email">Email</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="tel">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.collaborateur.tel">Tel</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="profil">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.collaborateur.profil">Profil</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dateEntree">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.collaborateur.dateEntree">Date Entree</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dateSortie">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.collaborateur.dateSortie">Date Sortie</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="statut">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.collaborateur.statut">Statut</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="commentaire">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.collaborateur.commentaire">Commentaire</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="projet.id">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.collaborateur.projet">Projet</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="equipements.equipementType">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.collaborateur.equipements">Equipements</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="localisation.id">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.collaborateur.localisation">Localisation</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let collaborateur of collaborateurs; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/collaborateur', collaborateur.id, 'view']">{{ collaborateur.identifiant }}</a>
+          </td>
+          <!-- <td>{{ collaborateur.identifiant }}</td> -->
+          <td>{{ collaborateur.matricule }}</td>
+          <td>{{ collaborateur.societe }}</td>
+          <td>{{ collaborateur.email }}</td>
+          <td>{{ collaborateur.tel }}</td>
+          <td>{{ collaborateur.profil }}</td>
+          <td>{{ collaborateur.dateEntree | formatMediumDate }}</td>
+          <td>{{ collaborateur.dateSortie | formatMediumDate }}</td>
+          <td jhiTranslate="{{ 'ihmadminRsa2App.StatutCollaborateur.' + collaborateur.statut }}">{{ collaborateur.statut }}</td>
+          <td>{{ collaborateur.commentaire }}</td>
+          <td>
+            <span *ngFor="let projet of collaborateur.projets; let last = last">
+              <a class="form-control-static" [routerLink]="['/projet', projet.id, 'view']">{{ projet.nom }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td>
+            <span *ngFor="let equipements of collaborateur.equipements; let last = last">
+              <a class="form-control-static" [routerLink]="['/equipement', equipements.id, 'view']"
+                >{{ equipements.equipementType }} {{ equipements.asset }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td>
+            <div *ngIf="collaborateur.localisation">
+              <a [routerLink]="['/localisation', collaborateur.localisation.id, 'view']"
+                >{{ collaborateur.localisation.ville }} {{ collaborateur.localisation.site }} {{ collaborateur.localisation.bureau }}</a
+              >
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/collaborateur', collaborateur.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/collaborateur', collaborateur.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(collaborateur)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

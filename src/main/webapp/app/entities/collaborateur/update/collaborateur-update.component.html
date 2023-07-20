@@ -1,0 +1,199 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-collaborateur-heading"
+        data-cy="CollaborateurCreateUpdateHeading"
+        jhiTranslate="ihmadminRsa2App.collaborateur.home.createOrEditLabel"
+      >
+        Create or edit a Collaborateur
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="text" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.collaborateur.identifiant" for="field_identifiant">Identifiant</label>
+          <input
+            type="text"
+            class="form-control"
+            name="identifiant"
+            id="field_identifiant"
+            data-cy="identifiant"
+            formControlName="identifiant"
+          />
+          <div *ngIf="editForm.get('identifiant')!.invalid && (editForm.get('identifiant')!.dirty || editForm.get('identifiant')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('identifiant')?.errors?.required"
+              jhiTranslate="entity.validation.required"
+            >
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.collaborateur.matricule" for="field_matricule">Matricule</label>
+          <input type="text" class="form-control" name="matricule" id="field_matricule" data-cy="matricule" formControlName="matricule" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.collaborateur.societe" for="field_societe">Societe</label>
+          <input type="text" class="form-control" name="societe" id="field_societe" data-cy="societe" formControlName="societe" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.collaborateur.email" for="field_email">Email</label>
+          <input type="text" class="form-control" name="email" id="field_email" data-cy="email" formControlName="email" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.collaborateur.tel" for="field_tel">Tel</label>
+          <input type="text" class="form-control" name="tel" id="field_tel" data-cy="tel" formControlName="tel" />
+          <div *ngIf="editForm.get('tel')!.invalid && (editForm.get('tel')!.dirty || editForm.get('tel')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('tel')?.errors?.pattern"
+              jhiTranslate="entity.validation.pattern"
+              [translateValues]="{ pattern: 'Tel' }"
+            >
+              This field should follow pattern for Tel.
+            </small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.collaborateur.profil" for="field_profil">Profil</label>
+          <input type="text" class="form-control" name="profil" id="field_profil" data-cy="profil" formControlName="profil" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.collaborateur.dateEntree" for="field_dateEntree">Date Entree</label>
+          <div class="input-group">
+            <input
+              id="field_dateEntree"
+              data-cy="dateEntree"
+              type="text"
+              class="form-control"
+              name="dateEntree"
+              ngbDatepicker
+              #dateEntreeDp="ngbDatepicker"
+              formControlName="dateEntree"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateEntreeDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.collaborateur.dateSortie" for="field_dateSortie">Date Sortie</label>
+          <div class="input-group">
+            <input
+              id="field_dateSortie"
+              data-cy="dateSortie"
+              type="text"
+              class="form-control"
+              name="dateSortie"
+              ngbDatepicker
+              #dateSortieDp="ngbDatepicker"
+              formControlName="dateSortie"
+            />
+            <button type="button" class="btn btn-secondary" (click)="dateSortieDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.collaborateur.statut" for="field_statut">Statut</label>
+          <select class="form-control" name="statut" formControlName="statut" id="field_statut" data-cy="statut">
+            <option [ngValue]="null">{{ 'ihmadminRsa2App.StatutCollaborateur.null' | translate }}</option>
+            <option *ngFor="let statutCollaborateur of statutCollaborateurValues" [value]="statutCollaborateur">
+              {{ 'ihmadminRsa2App.StatutCollaborateur.' + statutCollaborateur | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.collaborateur.commentaire" for="field_commentaire">Commentaire</label>
+          <input
+            type="text"
+            class="form-control"
+            name="commentaire"
+            id="field_commentaire"
+            data-cy="commentaire"
+            formControlName="commentaire"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label jhiTranslate="ihmadminRsa2App.collaborateur.projet" for="field_projets">Projet</label>
+          <select
+            class="form-control"
+            id="field_projets"
+            data-cy="projet"
+            multiple
+            name="projets"
+            formControlName="projets"
+            [compareWith]="compareProjet"
+          >
+            <option [ngValue]="projetOption" *ngFor="let projetOption of projetsSharedCollection">{{ projetOption.nom }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label jhiTranslate="ihmadminRsa2App.collaborateur.equipements" for="field_equipements">Equipements</label>
+          <select
+            class="form-control"
+            id="field_equipements"
+            data-cy="equipements"
+            multiple
+            name="equipements"
+            formControlName="equipements"
+            [compareWith]="compareEquipement"
+          >
+            <option [ngValue]="equipementOption" *ngFor="let equipementOption of equipementsSharedCollection">
+              {{ equipementOption.asset }} {{ equipementOption.equipementType }}
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.collaborateur.localisation" for="field_localisation">Localisation</label>
+          <select
+            class="form-control"
+            id="field_localisation"
+            data-cy="localisation"
+            name="localisation"
+            formControlName="localisation"
+            [compareWith]="compareLocalisation"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="localisationOption" *ngFor="let localisationOption of localisationsSharedCollection">
+              {{ localisationOption.ville }} {{ localisationOption.site }} {{ localisationOption.bureau }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

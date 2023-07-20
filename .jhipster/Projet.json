@@ -1,0 +1,48 @@
+{
+  "applications": "*",
+  "changelogDate": "20230720072517",
+  "entityTableName": "projet",
+  "fields": [
+    {
+      "fieldName": "nom",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "structure",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "societeCPDP",
+      "fieldType": "SocieteCPDP",
+      "fieldValues": "CGI,SSG,DGFIP"
+    }
+  ],
+  "name": "Projet",
+  "relationships": [
+    {
+      "otherEntityField": "identifiant",
+      "otherEntityName": "collaborateur",
+      "otherEntityRelationshipName": "cp",
+      "relationshipName": "cp",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityField": "identifiant",
+      "otherEntityName": "collaborateur",
+      "otherEntityRelationshipName": "dp",
+      "relationshipName": "dp",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "collaborateur",
+      "otherEntityRelationshipName": "projet",
+      "relationshipName": "collaborateur",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

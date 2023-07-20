@@ -1,0 +1,50 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="teletravail">
+      <h2 data-cy="teletravailDetailsHeading"><span jhiTranslate="ihmadminRsa2App.teletravail.detail.title">Teletravail</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ teletravail.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.teletravail.ipDGFIPFixe">Ip DGFIP Fixe</span></dt>
+        <dd>
+          <span>{{ teletravail.ipDGFIPFixe }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.teletravail.ipTeletravail">Ip Teletravail</span></dt>
+        <dd>
+          <span>{{ teletravail.ipTeletravail }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.teletravail.ipIPSEC">Ip IPSEC</span></dt>
+        <dd>
+          <span>{{ teletravail.ipIPSEC }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.teletravail.isActif">Is Actif</span></dt>
+        <dd>
+          <span>{{ teletravail.isActif }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.teletravail.equipement">Equipement</span></dt>
+        <dd>
+          <div *ngIf="teletravail.equipement">
+            <a [routerLink]="['/equipement', teletravail.equipement.id, 'view']">{{ teletravail.equipement.asset }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/teletravail', teletravail.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

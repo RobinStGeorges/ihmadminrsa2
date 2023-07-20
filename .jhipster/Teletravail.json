@@ -1,0 +1,40 @@
+{
+  "applications": "*",
+  "changelogDate": "20230720072518",
+  "entityTableName": "teletravail",
+  "fields": [
+    {
+      "fieldName": "ipDGFIPFixe",
+      "fieldType": "String",
+      "fieldValidateRules": ["pattern"],
+      "fieldValidateRulesPattern": "[0-9]{1,3}[.]{1}[0-9]{1,3}[.]{1}[0-9]{1,3}[.]{1}[0-9]{1,3}"
+    },
+    {
+      "fieldName": "ipTeletravail",
+      "fieldType": "String",
+      "fieldValidateRules": ["pattern"],
+      "fieldValidateRulesPattern": "[0-9]{1,3}[.]{1}[0-9]{1,3}[.]{1}[0-9]{1,3}[.]{1}[0-9]{1,3}"
+    },
+    {
+      "fieldName": "ipIPSEC",
+      "fieldType": "String",
+      "fieldValidateRules": ["pattern"],
+      "fieldValidateRulesPattern": "[0-9]{1,3}[.]{1}[0-9]{1,3}[.]{1}[0-9]{1,3}[.]{1}[0-9]{1,3}"
+    },
+    {
+      "fieldName": "isActif",
+      "fieldType": "Boolean"
+    }
+  ],
+  "name": "Teletravail",
+  "relationships": [
+    {
+      "otherEntityName": "equipement",
+      "otherEntityRelationshipName": "teletravail",
+      "relationshipName": "equipement",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

@@ -1,0 +1,185 @@
+<div>
+  <h2 id="page-heading" data-cy="EquipementHeading">
+    <span jhiTranslate="ihmadminRsa2App.equipement.home.title">Equipements</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="ihmadminRsa2App.equipement.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-equipement"
+        [routerLink]="['/equipement/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="ihmadminRsa2App.equipement.home.createLabel"> Create a new Equipement </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="equipements?.length === 0">
+    <span jhiTranslate="ihmadminRsa2App.equipement.home.notFound">No Equipements found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="equipements && equipements.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="adressePhysique">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.equipement.adressePhysique">Adresse Physique</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="equipementType">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.equipement.equipementType">Equipement Type</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="ip">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.equipement.ip">Ip</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="biosVersion">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.equipement.biosVersion">Bios Version</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="commentaire">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.equipement.commentaire">Commentaire</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="asset">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.equipement.asset">Asset</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="numeroSerie">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.equipement.numeroSerie">Numero Serie</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="modele">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.equipement.modele">Modele</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="generation">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.equipement.generation">Generation</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="marque">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.equipement.marque">Marque</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="fonctionnel">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.equipement.fonctionnel">Fonctionnel</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="cleAntiVolAdmin">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.equipement.cleAntiVolAdmin">Cle Anti Vol Admin</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="cleAntiVolCollaborateur">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.equipement.cleAntiVolCollaborateur">Cle Anti Vol Collaborateur</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="localisation.id">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.equipement.localisation">Localisation</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let equipement of equipements; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/equipement', equipement.id, 'view']">{{ equipement.id }}</a>
+          </td>
+          <td>{{ equipement.adressePhysique }}</td>
+          <td jhiTranslate="{{ 'ihmadminRsa2App.EquipementType.' + equipement.equipementType }}">{{ equipement.equipementType }}</td>
+          <td>{{ equipement.ip }}</td>
+          <td>{{ equipement.biosVersion }}</td>
+          <td>{{ equipement.commentaire }}</td>
+          <td>{{ equipement.asset }}</td>
+          <td>{{ equipement.numeroSerie }}</td>
+          <td>{{ equipement.modele }}</td>
+          <td>{{ equipement.generation }}</td>
+          <td>{{ equipement.marque }}</td>
+          <td>{{ equipement.fonctionnel }}</td>
+          <td>{{ equipement.cleAntiVolAdmin }}</td>
+          <td>{{ equipement.cleAntiVolCollaborateur }}</td>
+          <td>
+            <div *ngIf="equipement.localisation">
+              <a [routerLink]="['/localisation', equipement.localisation.id, 'view']"
+                >{{ equipement.localisation.ville }} {{ equipement.localisation.site }} {{ equipement.localisation.bureau }}</a
+              >
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/equipement', equipement.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/equipement', equipement.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(equipement)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

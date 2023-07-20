@@ -1,0 +1,38 @@
+{
+  "ihmadminRsa2App": {
+    "collaborateur": {
+      "home": {
+        "title": "Collaborateurs",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Collaborateur",
+        "createOrEditLabel": "Créer ou éditer un Collaborateur",
+        "notFound": "Aucun Collaborateur trouvé"
+      },
+      "created": "Un nouveau Collaborateur a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Collaborateur avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Collaborateur avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Collaborateur {{ id }} ?"
+      },
+      "detail": {
+        "title": "Collaborateur"
+      },
+      "id": "ID",
+      "identifiant": "Identifiant",
+      "matricule": "Matricule",
+      "societe": "Societe",
+      "email": "Email",
+      "tel": "Tel",
+      "profil": "Profil",
+      "dateEntree": "Date Entree",
+      "dateSortie": "Date Sortie",
+      "statut": "Statut",
+      "commentaire": "Commentaire",
+      "projet": "Projet",
+      "equipements": "Equipements",
+      "localisation": "Localisation",
+      "cp": "Cp",
+      "dp": "Dp"
+    }
+  }
+}

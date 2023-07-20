@@ -1,0 +1,40 @@
+{
+  "ihmadminRsa2App": {
+    "equipement": {
+      "home": {
+        "title": "Equipements",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Equipement",
+        "createOrEditLabel": "Create or edit a Equipement",
+        "notFound": "No Equipements found"
+      },
+      "created": "A new Equipement is created with identifier {{ param }}",
+      "updated": "A Equipement is updated with identifier {{ param }}",
+      "deleted": "A Equipement is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Equipement {{ id }}?"
+      },
+      "detail": {
+        "title": "Equipement"
+      },
+      "id": "ID",
+      "adressePhysique": "Adresse Physique",
+      "equipementType": "Equipement Type",
+      "ip": "Ip",
+      "biosVersion": "Bios Version",
+      "commentaire": "Commentaire",
+      "asset": "Asset",
+      "numeroSerie": "Numero Serie",
+      "modele": "Modele",
+      "generation": "Generation",
+      "marque": "Marque",
+      "fonctionnel": "Fonctionnel",
+      "cleAntiVolAdmin": "Cle Anti Vol Admin",
+      "cleAntiVolCollaborateur": "Cle Anti Vol Collaborateur",
+      "numeroStation": "Numero Station",
+      "teletravail": "Teletravail",
+      "localisation": "Localisation",
+      "collaborateur": "Collaborateur"
+    }
+  }
+}

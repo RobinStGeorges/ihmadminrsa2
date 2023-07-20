@@ -1,0 +1,24 @@
+{
+  "applications": "*",
+  "changelogDate": "20230720072516",
+  "entityTableName": "numero_station",
+  "fields": [
+    {
+      "fieldName": "numeroStation",
+      "fieldType": "String",
+      "fieldValidateRules": ["pattern"],
+      "fieldValidateRulesPattern": "[Z]{1}[0-9]{3}[-]{1}[0-9]{7}"
+    }
+  ],
+  "name": "NumeroStation",
+  "relationships": [
+    {
+      "otherEntityName": "equipement",
+      "otherEntityRelationshipName": "numeroStation",
+      "relationshipName": "equipement",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

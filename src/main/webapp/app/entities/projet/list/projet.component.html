@@ -1,0 +1,116 @@
+<div>
+  <h2 id="page-heading" data-cy="ProjetHeading">
+    <span jhiTranslate="ihmadminRsa2App.projet.home.title">Projets</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="ihmadminRsa2App.projet.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-projet"
+        [routerLink]="['/projet/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="ihmadminRsa2App.projet.home.createLabel"> Create a new Projet </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="projets?.length === 0">
+    <span jhiTranslate="ihmadminRsa2App.projet.home.notFound">No Projets found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="projets && projets.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="nom">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.projet.nom">Nom</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="structure">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.projet.structure">Structure</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="societeCPDP">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.projet.societeCPDP">Societe CPDP</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="cp.identifiant">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.projet.cp">Cp</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="dp.identifiant">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.projet.dp">Dp</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let projet of projets; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/projet', projet.id, 'view']">{{ projet.id }}</a>
+          </td>
+          <td>{{ projet.nom }}</td>
+          <td>{{ projet.structure }}</td>
+          <td jhiTranslate="{{ 'ihmadminRsa2App.SocieteCPDP.' + projet.societeCPDP }}">{{ projet.societeCPDP }}</td>
+          <td>
+            <span *ngFor="let cp of projet.cps; let last = last">
+              <a class="form-control-static" [routerLink]="['/collaborateur', cp.id, 'view']">{{ cp.identifiant }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td>
+            <span *ngFor="let dp of projet.dps; let last = last">
+              <a class="form-control-static" [routerLink]="['/collaborateur', dp.id, 'view']">{{ dp.identifiant }}</a
+              >{{ last ? '' : ', ' }}
+            </span>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button type="submit" [routerLink]="['/projet', projet.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button type="submit" [routerLink]="['/projet', projet.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(projet)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,90 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="collaborateur">
+      <h2 data-cy="collaborateurDetailsHeading"><span jhiTranslate="ihmadminRsa2App.collaborateur.detail.title">Collaborateur</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ collaborateur.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.collaborateur.identifiant">Identifiant</span></dt>
+        <dd>
+          <span>{{ collaborateur.identifiant }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.collaborateur.matricule">Matricule</span></dt>
+        <dd>
+          <span>{{ collaborateur.matricule }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.collaborateur.societe">Societe</span></dt>
+        <dd>
+          <span>{{ collaborateur.societe }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.collaborateur.email">Email</span></dt>
+        <dd>
+          <span>{{ collaborateur.email }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.collaborateur.tel">Tel</span></dt>
+        <dd>
+          <span>{{ collaborateur.tel }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.collaborateur.profil">Profil</span></dt>
+        <dd>
+          <span>{{ collaborateur.profil }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.collaborateur.dateEntree">Date Entree</span></dt>
+        <dd>
+          <span>{{ collaborateur.dateEntree | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.collaborateur.dateSortie">Date Sortie</span></dt>
+        <dd>
+          <span>{{ collaborateur.dateSortie | formatMediumDate }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.collaborateur.statut">Statut</span></dt>
+        <dd>
+          <span jhiTranslate="{{ 'ihmadminRsa2App.StatutCollaborateur.' + collaborateur.statut }}">{{ collaborateur.statut }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.collaborateur.commentaire">Commentaire</span></dt>
+        <dd>
+          <span>{{ collaborateur.commentaire }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.collaborateur.projet">Projet</span></dt>
+        <dd>
+          <span *ngFor="let projet of collaborateur.projets; let last = last">
+            <a [routerLink]="['/projet', projet.id, 'view']">{{ projet.nom }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.collaborateur.equipements">Equipements</span></dt>
+        <dd>
+          <span *ngFor="let equipements of collaborateur.equipements; let last = last">
+            <a [routerLink]="['/equipement', equipements.id, 'view']">{{ equipements.equipementType }} {{ equipements.asset }}</a
+            >{{ last ? '' : ', ' }}
+          </span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.collaborateur.localisation">Localisation</span></dt>
+        <dd>
+          <div *ngIf="collaborateur.localisation">
+            <a [routerLink]="['/localisation', collaborateur.localisation.id, 'view']"
+              >{{ collaborateur.localisation.ville }} {{ collaborateur.localisation.site }} {{ collaborateur.localisation.bureau }}</a
+            >
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/collaborateur', collaborateur.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

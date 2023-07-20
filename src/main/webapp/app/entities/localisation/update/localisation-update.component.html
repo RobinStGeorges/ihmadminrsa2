@@ -1,0 +1,79 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-localisation-heading"
+        data-cy="LocalisationCreateUpdateHeading"
+        jhiTranslate="ihmadminRsa2App.localisation.home.createOrEditLabel"
+      >
+        Create or edit a Localisation
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="text" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.localisation.ville" for="field_ville">Ville</label>
+          <select class="form-control" name="ville" formControlName="ville" id="field_ville" data-cy="ville">
+            <option [ngValue]="null">{{ 'ihmadminRsa2App.Ville.null' | translate }}</option>
+            <option *ngFor="let ville of villeValues" [value]="ville">{{ 'ihmadminRsa2App.Ville.' + ville | translate }}</option>
+          </select>
+          <div *ngIf="editForm.get('ville')!.invalid && (editForm.get('ville')!.dirty || editForm.get('ville')!.touched)">
+            <small class="form-text text-danger" *ngIf="editForm.get('ville')?.errors?.required" jhiTranslate="entity.validation.required">
+              This field is required.
+            </small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.localisation.site" for="field_site">Site</label>
+          <select class="form-control" name="site" formControlName="site" id="field_site" data-cy="site">
+            <option [ngValue]="null">{{ 'ihmadminRsa2App.Site.null' | translate }}</option>
+            <option *ngFor="let site of siteValues" [value]="site">{{ 'ihmadminRsa2App.Site.' + site | translate }}</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.localisation.batiment" for="field_batiment">Batiment</label>
+          <input type="text" class="form-control" name="batiment" id="field_batiment" data-cy="batiment" formControlName="batiment" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.localisation.etage" for="field_etage">Etage</label>
+          <input type="number" class="form-control" name="etage" id="field_etage" data-cy="etage" formControlName="etage" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.localisation.bureau" for="field_bureau">Bureau</label>
+          <input type="text" class="form-control" name="bureau" id="field_bureau" data-cy="bureau" formControlName="bureau" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.localisation.place" for="field_place">Place</label>
+          <input type="text" class="form-control" name="place" id="field_place" data-cy="place" formControlName="place" />
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

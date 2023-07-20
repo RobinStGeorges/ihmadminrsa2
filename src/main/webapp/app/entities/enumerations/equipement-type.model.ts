@@ -1,0 +1,17 @@
+export enum EquipementType {
+  Ordinateur_Portable_DGFIP = 'Ordinateur_Portable_DGFIP',
+
+  Ordinateur_Portable_Domicile = 'Ordinateur_Portable_Domicile',
+
+  Ordinateur_Fixe = 'Ordinateur_Fixe',
+
+  Clavier = 'Clavier',
+
+  Ecran = 'Ecran',
+
+  AdaptateurUsbEth = 'AdaptateurUsbEth',
+
+  HubEth = 'HubEth',
+
+  RAM = 'RAM',
+}

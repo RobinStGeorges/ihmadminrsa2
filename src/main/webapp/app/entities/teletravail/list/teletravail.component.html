@@ -1,0 +1,120 @@
+<div>
+  <h2 id="page-heading" data-cy="TeletravailHeading">
+    <span jhiTranslate="ihmadminRsa2App.teletravail.home.title">Teletravails</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [spin]="isLoading"></fa-icon>
+        <span jhiTranslate="ihmadminRsa2App.teletravail.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-teletravail"
+        [routerLink]="['/teletravail/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="ihmadminRsa2App.teletravail.home.createLabel"> Create a new Teletravail </span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error></jhi-alert-error>
+
+  <jhi-alert></jhi-alert>
+
+  <div class="alert alert-warning" id="no-result" *ngIf="teletravails?.length === 0">
+    <span jhiTranslate="ihmadminRsa2App.teletravail.home.notFound">No Teletravails found</span>
+  </div>
+
+  <div class="table-responsive table-entities" id="entities" *ngIf="teletravails && teletravails.length > 0">
+    <table class="table table-striped" aria-describedby="page-heading">
+      <thead>
+        <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" (sortChange)="navigateToWithComponentValues()">
+          <th scope="col" jhiSortBy="id">
+            <div class="d-flex">
+              <span jhiTranslate="global.field.id">ID</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="ipDGFIPFixe">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.teletravail.ipDGFIPFixe">Ip DGFIP Fixe</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="ipTeletravail">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.teletravail.ipTeletravail">Ip Teletravail</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="ipIPSEC">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.teletravail.ipIPSEC">Ip IPSEC</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="isActif">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.teletravail.isActif">Is Actif</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col" jhiSortBy="equipement.id">
+            <div class="d-flex">
+              <span jhiTranslate="ihmadminRsa2App.teletravail.equipement">Equipement</span>
+              <fa-icon class="p-1" icon="sort"></fa-icon>
+            </div>
+          </th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let teletravail of teletravails; trackBy: trackId" data-cy="entityTable">
+          <td>
+            <a [routerLink]="['/teletravail', teletravail.id, 'view']">{{ teletravail.id }}</a>
+          </td>
+          <td>{{ teletravail.ipDGFIPFixe }}</td>
+          <td>{{ teletravail.ipTeletravail }}</td>
+          <td>{{ teletravail.ipIPSEC }}</td>
+          <td>{{ teletravail.isActif }}</td>
+          <td>
+            <div *ngIf="teletravail.equipement">
+              <a [routerLink]="['/equipement', teletravail.equipement.id, 'view']">{{ teletravail.equipement.asset }}</a>
+            </div>
+          </td>
+          <td class="text-end">
+            <div class="btn-group">
+              <button
+                type="submit"
+                [routerLink]="['/teletravail', teletravail.id, 'view']"
+                class="btn btn-info btn-sm"
+                data-cy="entityDetailsButton"
+              >
+                <fa-icon icon="eye"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+              </button>
+
+              <button
+                type="submit"
+                [routerLink]="['/teletravail', teletravail.id, 'edit']"
+                class="btn btn-primary btn-sm"
+                data-cy="entityEditButton"
+              >
+                <fa-icon icon="pencil-alt"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+              </button>
+
+              <button type="submit" (click)="delete(teletravail)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                <fa-icon icon="times"></fa-icon>
+                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

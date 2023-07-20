@@ -1,0 +1,38 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <div *ngIf="numeroStation">
+      <h2 data-cy="numeroStationDetailsHeading"><span jhiTranslate="ihmadminRsa2App.numeroStation.detail.title">Numero Station</span></h2>
+
+      <hr />
+
+      <jhi-alert-error></jhi-alert-error>
+
+      <jhi-alert></jhi-alert>
+
+      <dl class="row-md jh-entity-details">
+        <dt><span jhiTranslate="global.field.id">ID</span></dt>
+        <dd>
+          <span>{{ numeroStation.id }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.numeroStation.numeroStation">Numero Station</span></dt>
+        <dd>
+          <span>{{ numeroStation.numeroStation }}</span>
+        </dd>
+        <dt><span jhiTranslate="ihmadminRsa2App.numeroStation.equipement">Equipement</span></dt>
+        <dd>
+          <div *ngIf="numeroStation.equipement">
+            <a [routerLink]="['/equipement', numeroStation.equipement.id, 'view']">{{ numeroStation.equipement.id }}</a>
+          </div>
+        </dd>
+      </dl>
+
+      <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+        <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+      </button>
+
+      <button type="button" [routerLink]="['/numero-station', numeroStation.id, 'edit']" class="btn btn-primary">
+        <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+    </div>
+  </div>
+</div>

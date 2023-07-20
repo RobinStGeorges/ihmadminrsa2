@@ -1,0 +1,28 @@
+{
+  "ihmadminRsa2App": {
+    "teletravail": {
+      "home": {
+        "title": "Teletravails",
+        "refreshListLabel": "Actualiser la liste",
+        "createLabel": "Créer un nouveau Teletravail",
+        "createOrEditLabel": "Créer ou éditer un Teletravail",
+        "notFound": "Aucun Teletravail trouvé"
+      },
+      "created": "Un nouveau Teletravail a été créé avec l'identifiant {{ param }}",
+      "updated": "Le Teletravail avec l'identifiant {{ param }} a été mis à jour",
+      "deleted": "Le Teletravail avec l'identifiant {{ param }} a été supprimé",
+      "delete": {
+        "question": "Êtes-vous certain de vouloir supprimer le Teletravail {{ id }} ?"
+      },
+      "detail": {
+        "title": "Teletravail"
+      },
+      "id": "ID",
+      "ipDGFIPFixe": "Ip DGFIP Fixe",
+      "ipTeletravail": "Ip Teletravail",
+      "ipIPSEC": "Ip IPSEC",
+      "isActif": "Is Actif",
+      "equipement": "Equipement"
+    }
+  }
+}

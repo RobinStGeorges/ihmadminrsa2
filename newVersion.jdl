@@ -1,0 +1,107 @@
+entity Collaborateur {
+	identifiant String required
+    matricule String
+    societe String
+    email String
+    tel String pattern(/^((\+)33|0|0033)[1-9](\d{2}){4}$/)
+    profil String
+    dateEntree LocalDate
+    dateSortie LocalDate
+    statut StatutCollaborateur
+    commentaire String
+}
+
+entity Projet {
+	nom String required
+    structure String
+    societeCPDP SocieteCPDP
+}
+
+entity Localisation {
+	ville Ville required
+    site Site
+    batiment String
+    etage Integer
+    bureau String
+    place String
+}
+
+entity Equipement {
+	adressePhysique String pattern (/[A-Za-z-0-9]{1}[A-Za-z-0-9]{1}[:|-]{1}[A-Za-z-0-9]{1}[A-Za-z-0-9]{1}[:|-]{1}[A-Za-z-0-9]{1}[A-Za-z-0-9]{1}[:|-]{1}[A-Za-z-0-9]{1}[A-Za-z-0-9]{1}[:|-]{1}[A-Za-z-0-9]{1}[A-Za-z-0-9]{1}[:|-]{1}[A-Za-z-0-9]{1}[A-Za-z-0-9]{1}/)
+    equipementType EquipementType
+    ip String
+    biosVersion String
+    commentaire String
+    asset String pattern (/[S]{1}[0-9]+/)
+    numeroSerie String
+     
+}
+
+entity NumeroStation {
+	numeroStation String pattern (/[Z]{1}[0-9]{3}[-]{1}[0-9]{7}/)
+}
+
+entity Teletravail {
+	ipDGFIPFixe String pattern (/[0-9]{1,3}[.]{1}[0-9]{1,3}[.]{1}[0-9]{1,3}[.]{1}[0-9]{1,3}/)
+    ipTeletravail String pattern (/[0-9]{1,3}[.]{1}[0-9]{1,3}[.]{1}[0-9]{1,3}[.]{1}[0-9]{1,3}/)
+    ipIPSEC String pattern (/[0-9]{1,3}[.]{1}[0-9]{1,3}[.]{1}[0-9]{1,3}[.]{1}[0-9]{1,3}/)
+    isActif Boolean
+}
+
+
+
+enum StatutCollaborateur {
+	Arrivee,
+    Sortie,
+    Actif,
+    Inactif
+}
+
+enum SocieteCPDP {
+	CGI,
+    SSG,
+    DGFIP
+}
+
+enum Ville {
+	Noisy,
+    Noisiel,
+    Montreuil
+}
+
+enum Site {
+	Maille_Nord,
+    Montaigne,
+    Blanqui
+}
+
+enum EquipementType {
+	Ordinateur_Portable_DGFIP,
+    Ordinateur_Portable_Domicile,
+    Ordinateur_Fixe,
+    Clavier,
+    Ecran,
+    AdaptateurUsbEth,
+    HubEth,
+    RAM
+}
+
+relationship OneToOne {
+	NumeroStation to Equipement
+    Teletravail to Equipement
+}
+
+relationship OneToMany {
+  Collaborateur to Localisation
+  Equipement to Localisation
+}
+
+relationship ManyToMany {
+	Collaborateur to Projet
+  	Collaborateur{equipements(equipementType)} to Equipement
+    Projet{cp(identifiant)} to Collaborateur{cp(nom)}
+    Projet{dp(identifiant)} to Collaborateur{dp(nom)}
+}
+
+
+

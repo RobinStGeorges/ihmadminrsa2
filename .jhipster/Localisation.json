@@ -1,0 +1,52 @@
+{
+  "applications": "*",
+  "changelogDate": "20230720072515",
+  "entityTableName": "localisation",
+  "fields": [
+    {
+      "fieldName": "ville",
+      "fieldType": "Ville",
+      "fieldValidateRules": ["required"],
+      "fieldValues": "Noisy,Noisiel,Montreuil"
+    },
+    {
+      "fieldName": "site",
+      "fieldType": "Site",
+      "fieldValues": "Maille_Nord,Montaigne,Blanqui"
+    },
+    {
+      "fieldName": "batiment",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "etage",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "bureau",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "place",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Localisation",
+  "relationships": [
+    {
+      "otherEntityName": "collaborateur",
+      "otherEntityRelationshipName": "localisation",
+      "relationshipName": "collaborateur",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "equipement",
+      "otherEntityRelationshipName": "localisation",
+      "relationshipName": "equipement",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

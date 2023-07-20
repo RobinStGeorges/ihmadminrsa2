@@ -1,0 +1,125 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-teletravail-heading"
+        data-cy="TeletravailCreateUpdateHeading"
+        jhiTranslate="ihmadminRsa2App.teletravail.home.createOrEditLabel"
+      >
+        Create or edit a Teletravail
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="text" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.teletravail.ipDGFIPFixe" for="field_ipDGFIPFixe">Ip DGFIP Fixe</label>
+          <input
+            type="text"
+            class="form-control"
+            name="ipDGFIPFixe"
+            id="field_ipDGFIPFixe"
+            data-cy="ipDGFIPFixe"
+            formControlName="ipDGFIPFixe"
+          />
+          <div *ngIf="editForm.get('ipDGFIPFixe')!.invalid && (editForm.get('ipDGFIPFixe')!.dirty || editForm.get('ipDGFIPFixe')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('ipDGFIPFixe')?.errors?.pattern"
+              jhiTranslate="entity.validation.pattern"
+              [translateValues]="{ pattern: 'Ip DGFIP Fixe' }"
+            >
+              This field should follow pattern for Ip DGFIP Fixe.
+            </small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.teletravail.ipTeletravail" for="field_ipTeletravail"
+            >Ip Teletravail</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="ipTeletravail"
+            id="field_ipTeletravail"
+            data-cy="ipTeletravail"
+            formControlName="ipTeletravail"
+          />
+          <div
+            *ngIf="
+              editForm.get('ipTeletravail')!.invalid && (editForm.get('ipTeletravail')!.dirty || editForm.get('ipTeletravail')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('ipTeletravail')?.errors?.pattern"
+              jhiTranslate="entity.validation.pattern"
+              [translateValues]="{ pattern: 'Ip Teletravail' }"
+            >
+              This field should follow pattern for Ip Teletravail.
+            </small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.teletravail.ipIPSEC" for="field_ipIPSEC">Ip IPSEC</label>
+          <input type="text" class="form-control" name="ipIPSEC" id="field_ipIPSEC" data-cy="ipIPSEC" formControlName="ipIPSEC" />
+          <div *ngIf="editForm.get('ipIPSEC')!.invalid && (editForm.get('ipIPSEC')!.dirty || editForm.get('ipIPSEC')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('ipIPSEC')?.errors?.pattern"
+              jhiTranslate="entity.validation.pattern"
+              [translateValues]="{ pattern: 'Ip IPSEC' }"
+            >
+              This field should follow pattern for Ip IPSEC.
+            </small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.teletravail.isActif" for="field_isActif">Is Actif</label>
+          <input type="checkbox" class="form-check" name="isActif" id="field_isActif" data-cy="isActif" formControlName="isActif" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.teletravail.equipement" for="field_equipement">Equipement</label>
+          <select
+            class="form-control"
+            id="field_equipement"
+            data-cy="equipement"
+            name="equipement"
+            formControlName="equipement"
+            [compareWith]="compareEquipement"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="equipementOption" *ngFor="let equipementOption of equipementsCollection">
+              {{ equipementOption.asset }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

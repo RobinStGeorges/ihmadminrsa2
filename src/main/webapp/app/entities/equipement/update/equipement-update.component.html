@@ -1,0 +1,220 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-equipement-heading"
+        data-cy="EquipementCreateUpdateHeading"
+        jhiTranslate="ihmadminRsa2App.equipement.home.createOrEditLabel"
+      >
+        Create or edit a Equipement
+      </h2>
+
+      <div>
+        <jhi-alert-error></jhi-alert-error>
+
+        <div class="mb-3" *ngIf="editForm.controls.id.value !== null">
+          <label class="form-label" jhiTranslate="global.field.id" for="field_id">ID</label>
+          <input type="text" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.equipement.adressePhysique" for="field_adressePhysique"
+            >Adresse Physique</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="adressePhysique"
+            id="field_adressePhysique"
+            data-cy="adressePhysique"
+            formControlName="adressePhysique"
+          />
+          <div
+            *ngIf="
+              editForm.get('adressePhysique')!.invalid &&
+              (editForm.get('adressePhysique')!.dirty || editForm.get('adressePhysique')!.touched)
+            "
+          >
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('adressePhysique')?.errors?.pattern"
+              jhiTranslate="entity.validation.pattern"
+              [translateValues]="{ pattern: 'Adresse Physique' }"
+            >
+              This field should follow pattern for Adresse Physique.
+            </small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.equipement.equipementType" for="field_equipementType"
+            >Equipement Type</label
+          >
+          <select
+            class="form-control"
+            name="equipementType"
+            formControlName="equipementType"
+            id="field_equipementType"
+            data-cy="equipementType"
+          >
+            <option [ngValue]="null">{{ 'ihmadminRsa2App.EquipementType.null' | translate }}</option>
+            <option *ngFor="let equipementType of equipementTypeValues" [value]="equipementType">
+              {{ 'ihmadminRsa2App.EquipementType.' + equipementType | translate }}
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.equipement.ip" for="field_ip">Ip</label>
+          <input type="text" class="form-control" name="ip" id="field_ip" data-cy="ip" formControlName="ip" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.equipement.biosVersion" for="field_biosVersion">Bios Version</label>
+          <input
+            type="text"
+            class="form-control"
+            name="biosVersion"
+            id="field_biosVersion"
+            data-cy="biosVersion"
+            formControlName="biosVersion"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.equipement.commentaire" for="field_commentaire">Commentaire</label>
+          <input
+            type="text"
+            class="form-control"
+            name="commentaire"
+            id="field_commentaire"
+            data-cy="commentaire"
+            formControlName="commentaire"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.equipement.asset" for="field_asset">Asset</label>
+          <input type="text" class="form-control" name="asset" id="field_asset" data-cy="asset" formControlName="asset" />
+          <div *ngIf="editForm.get('asset')!.invalid && (editForm.get('asset')!.dirty || editForm.get('asset')!.touched)">
+            <small
+              class="form-text text-danger"
+              *ngIf="editForm.get('asset')?.errors?.pattern"
+              jhiTranslate="entity.validation.pattern"
+              [translateValues]="{ pattern: 'Asset' }"
+            >
+              This field should follow pattern for Asset.
+            </small>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.equipement.numeroSerie" for="field_numeroSerie">Numero Serie</label>
+          <input
+            type="text"
+            class="form-control"
+            name="numeroSerie"
+            id="field_numeroSerie"
+            data-cy="numeroSerie"
+            formControlName="numeroSerie"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.equipement.modele" for="field_modele">Modele</label>
+          <input type="text" class="form-control" name="modele" id="field_modele" data-cy="modele" formControlName="modele" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.equipement.generation" for="field_generation">Generation</label>
+          <input
+            type="text"
+            class="form-control"
+            name="generation"
+            id="field_generation"
+            data-cy="generation"
+            formControlName="generation"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.equipement.marque" for="field_marque">Marque</label>
+          <input type="text" class="form-control" name="marque" id="field_marque" data-cy="marque" formControlName="marque" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.equipement.fonctionnel" for="field_fonctionnel">Fonctionnel</label>
+          <input
+            type="checkbox"
+            class="form-check"
+            name="fonctionnel"
+            id="field_fonctionnel"
+            data-cy="fonctionnel"
+            formControlName="fonctionnel"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.equipement.cleAntiVolAdmin" for="field_cleAntiVolAdmin"
+            >Cle Anti Vol Admin</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="cleAntiVolAdmin"
+            id="field_cleAntiVolAdmin"
+            data-cy="cleAntiVolAdmin"
+            formControlName="cleAntiVolAdmin"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.equipement.cleAntiVolCollaborateur" for="field_cleAntiVolCollaborateur"
+            >Cle Anti Vol Collaborateur</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="cleAntiVolCollaborateur"
+            id="field_cleAntiVolCollaborateur"
+            data-cy="cleAntiVolCollaborateur"
+            formControlName="cleAntiVolCollaborateur"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" jhiTranslate="ihmadminRsa2App.equipement.localisation" for="field_localisation">Localisation</label>
+          <select
+            class="form-control"
+            id="field_localisation"
+            data-cy="localisation"
+            name="localisation"
+            formControlName="localisation"
+            [compareWith]="compareLocalisation"
+          >
+            <option [ngValue]="null"></option>
+            <option [ngValue]="localisationOption" *ngFor="let localisationOption of localisationsSharedCollection">
+              {{ localisationOption.ville }} {{ localisationOption.site }} {{ localisationOption.bureau }}
+            </option>
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

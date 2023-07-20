@@ -1,0 +1,11 @@
+{
+  "ihmadminRsa2App": {
+    "StatutCollaborateur": {
+      "null": "",
+      "Arrivee": "Arrivee",
+      "Sortie": "Sortie",
+      "Actif": "Actif",
+      "Inactif": "Inactif"
+    }
+  }
+}
