@@ -1,9 +1,9 @@
 {
   "home": {
-    "title": "Welcome, Java Hipster!",
-    "subtitle": "This is your homepage",
+    "title": "IHM Administration",
+    "subtitle": "Gestion du parc informatique NTIC4",
     "logged": {
-      "message": "You are logged in as user \"{{username}}\"."
+      "message": "Bienvenue \"{{username}}\"."
     },
     "question": "If you have any question on JHipster:",
     "link": {
